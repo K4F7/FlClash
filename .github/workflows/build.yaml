@@ -1,8 +1,8 @@
 name: build
 
-于:
+on:
   push:
-    标签:
+    tags:
       - 'v*'
 env:
   IS_STABLE: ${{ !contains(github.ref, '-') }}
@@ -221,7 +221,7 @@ jobs:
         if: ${{ env.IS_STABLE == 'true' }}
         uses: softprops/action-gh-release@v2
         with:
-          文件: ./dist/*
+          files: ./dist/*
           body_path: './release.md'
 
       - name: Create Fdroid Source Dir
@@ -245,4 +245,3 @@ jobs:
           target-branch: main
           commit-message: Update from ${{ github.ref_name }}
           target-directory: /tmp/
-
